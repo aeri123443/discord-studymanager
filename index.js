@@ -24,7 +24,7 @@ client.once(Events.ClientReady, readyClient => {
 
         // 오늘 날짜 기반 제목 생성
         const now = new Date();
-        const threadTitle = `${now.getMonth() + 1}월 ${now.getDate()}일`;
+        const threadTitle = `${now.getMonth() + 1}월 ${now.getDate()}일 ${now.getHours()}시`;
 
         // 스레드 만들기
         const thread = await channel.threads.create({
