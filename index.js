@@ -12,8 +12,8 @@ const threadOpenMsg = '# 기상시간 (주말+3시간)\n나래 11:30\n비월 09:
 client.once(Events.ClientReady, readyClient => {
     console.log(`✅ Logged in as ${readyClient.user.tag}`);
 
-    //  test: 1분 간격으로 실행(매분마다)
-    schedule.scheduleJob("0 * * * * *", async () => {
+    // test
+    schedule.scheduleJob("55 8 * * *", async () => {
         try {
         const channel = await client.channels.fetch(TARGET_CHANNEL_ID);
 
@@ -24,7 +24,8 @@ client.once(Events.ClientReady, readyClient => {
 
         // 오늘 날짜 기반 제목 생성
         const now = new Date();
-        const threadTitle = `${now.getMonth() + 1}월 ${now.getDate()}일 ${now.getHours()}시`;
+        const nowTime = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+        const threadTitle = `${now.getMonth() + 1}월 ${now.getDate()}일`;
 
         // 스레드 만들기
         const thread = await channel.threads.create({
@@ -33,7 +34,7 @@ client.once(Events.ClientReady, readyClient => {
         });
 
         await thread.send(threadOpenMsg);
-        console.log(`📌 ${threadTitle} 스레드 생성 완료`);
+        console.log(`📌 ${nowTime}  ${threadTitle} 스레드 생성 완료`);
         } catch (err) {
         console.error("에러 발생:", err);
         }
@@ -41,6 +42,3 @@ client.once(Events.ClientReady, readyClient => {
 })
 
 client.login(process.env.DISCORD_TOKEN);
-
-
-
