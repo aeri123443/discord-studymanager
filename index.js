@@ -26,9 +26,10 @@ client.once(Events.ClientReady, readyClient => {
 
         // 오늘 날짜 기반 제목 생성
         const now = new Date();
-        const koreaTimeStr = now.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-        const threadTitle = `${now.getMonth() + 1}월 ${now.getDate()}일`;
-
+        // const koreaTimeStr = now.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+        const koreaTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+        const threadTitle = `${koreaTime.getMonth() + 1}월 ${koreaTime.getDate()}일`;
+        const koreaTimeStamp = `${koreaTime.getFullYear()}/${koreaTime.getMonth() + 1}/${koreaTime.getDate()} ${koreaTime.getHours()}:${koreaTime.getMinutes()}:${koreaTime.getSeconds()}`;
         // 스레드 만들기
         const thread = await channel.threads.create({
             name: threadTitle,
@@ -36,7 +37,7 @@ client.once(Events.ClientReady, readyClient => {
         });
 
         await thread.send(threadOpenMsg);
-        console.log(`📌 ${koreaTimeStr}  ${threadTitle} 스레드 생성 완료`);
+        console.log(`📌 ${koreaTimeStamp}  ${threadTitle} 스레드 생성 완료`);
         } catch (err) {
         console.error("에러 발생:", err);
         }
