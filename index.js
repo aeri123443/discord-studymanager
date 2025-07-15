@@ -12,8 +12,10 @@ const threadOpenMsg = '# 기상시간 (주말+3시간)\n나래 11:30\n비월 09:
 client.once(Events.ClientReady, readyClient => {
     console.log(`✅ Logged in as ${readyClient.user.tag}`);
 
-    // test
-    schedule.scheduleJob("6 9 * * *", async () => {
+    // 배포
+    schedule.scheduleJob("0 15 * * *", async () => {
+    // 테스트(매분마다)
+    // schedule.scheduleJob("0 * * * * *", async () => {
         try {
         const channel = await client.channels.fetch(TARGET_CHANNEL_ID);
 
