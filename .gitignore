@@ -4,3 +4,7 @@
 # Node.js
 node_modules/
 .env
+
+# firebase
+serviceAccountKey.json
+firebase-debug.log
